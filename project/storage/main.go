@@ -54,7 +54,7 @@ func dataHandler(w http.ResponseWriter, r *http.Request) {
 	resp := map[string]interface{}{
 		"service": os.Getenv("STORAGE_NAME"),
 		"time":    time.Now(),
-		"data":    []string{"item1", "item2", "item3"},
+		"data":    []string{os.Getenv("STORAGE_NAME")},
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
@@ -67,29 +67,25 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port := os.Getenv("STORAGE_PORT")
-	if port == "" {
-		port = "9999"
-	}
-
+	servicePort := "9999"
 	serviceName := os.Getenv("STORAGE_NAME")
 	if serviceName == "" {
 		serviceName = "storage1"
 	}
 
-	storageAddr := "http://" + serviceName + ":" + port
+	storageAddr := "http://" + serviceName + ":" + servicePort
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/data", dataHandler)
 	mux.HandleFunc("/healthz", healthHandler)
 
 	server := &http.Server{
-		Addr:    ":" + port,
+		Addr:    ":" + servicePort,
 		Handler: mux,
 	}
 
 	go func() {
-		log.Println("Starting storage service on port " + port)
+		log.Println("Starting storage service on port " + servicePort)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Server failed: %v", err)
 		}
