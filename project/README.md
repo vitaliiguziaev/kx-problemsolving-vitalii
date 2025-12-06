@@ -33,6 +33,6 @@ The Gateway Service responds with HTTP 503 'Service Unavailable'. Detailed infor
 
 * Add a rate limiter to protect against DDoS attacks.
 
-* Set up observability: logs, tracing (Jaeger), metrics (Prometheus).
+* Set up observability: logs, traces (Jaeger), metrics (Prometheus), alerts, SLO / SLI / SLA
 
 * Add unit tests with coverage, end-to-end (E2E) tests, and performance tests (K6).
