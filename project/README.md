@@ -3,7 +3,7 @@
 ## Overview
 This solution consists of two main services:
 
-1. **Gateway Service** – serves data to clients and monitors the availability of Storage Services (0–3 may be available).  
+1. **Gateway Service** – serves data to clients and shows the availability of Storage Services (0–3 may be available).  
 
    **Public API** (port 8080, exposed externally via Docker Compose):  
    * `GET http://localhost:8080/status` – returns the status of each Storage Service  
@@ -11,11 +11,11 @@ This solution consists of two main services:
 
    **Internal API** (port 9090, accessible via Docker DNS in the internal network):  
    * `POST /register` – register a Storage Service in the service registry  
-   * `POST /heartbeat` – called periodically by each Storage Service to indicate it is alive  
+   * `POST /heartbeat` – invoke periodically by each Storage Service to indicate it is alive  
    * `GET /healthz` – returns service health status  
 
-2. **Storage Service** – registers itself with the Gateway Service on startup (`/register`) and periodically sends `/heartbeat` to indicate it is alive.  
-   It stores dummy data in memory, accessible via `GET /data`, and exposes `/healthz` for health checks.  
+2. **Storage Service** – registers itself with the Gateway Service on startup `/register` and periodically sends `/heartbeat` to indicate it is alive.  
+   It stores dummy data in memory, accessible via `GET /data`, and exposes `GET /healthz` for health checks.  
    **Environment variable:** `STORAGE_NAME` – defines the name of the service for registration and dummy data.  
 
 ## Running the Services
