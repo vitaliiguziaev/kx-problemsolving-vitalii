@@ -21,13 +21,16 @@ This solution consists of two main services:
 ## Running the Services
 docker compose -f docker-compose.yaml up -d --build
 
+## Running unit tests for the Gateway Service
+Inside of 'gateway' folder run next command: go test -v ./... 
+
 ## Behavior When No Storage Services Are Running
 
 The Gateway Service responds with HTTP 503 'Service Unavailable'. Detailed information can be found in container logs.
 
 ## Future Improvements
 
-* Add TLS to the Gateway Service (Public API) for HTTPS support; Internal API and Storage Services remain HTTP.
+* Add TLS to the Gateway Service (Public API) for HTTPS support. Internal API and Storage Services remain HTTP.
 
 * Implement JWT authentication for the Gateway Service (Public API).
 
@@ -35,4 +38,6 @@ The Gateway Service responds with HTTP 503 'Service Unavailable'. Detailed infor
 
 * Set up observability: logs, traces (Jaeger), metrics (Prometheus), alerts, SLO / SLI / SLA
 
-* Add unit tests with coverage, end-to-end (E2E) tests, and performance tests (K6).
+* Add more unit tests with coverage, end-to-end (E2E) tests, and performance tests (K6).
+
+* Create a Makefile to make project builds and running tests more convenient.
