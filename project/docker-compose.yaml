@@ -8,11 +8,12 @@ services:
     networks:
       - internal_net
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9090/healthz"]
+      test: ["CMD-SHELL", "curl -f http://localhost:9090/healthz || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 5
       start_period: 5s
+    restart: unless-stopped
 
   storage1:
     build:
@@ -23,11 +24,12 @@ services:
     networks:
       - internal_net
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/healthz"]
+      test: ["CMD-SHELL", "curl -f http://localhost:9999/healthz || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 5
       start_period: 5s
+    restart: unless-stopped
 
   storage2:
     build:
@@ -38,11 +40,12 @@ services:
     networks:
       - internal_net
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/healthz"]
+      test: ["CMD-SHELL", "curl -f http://localhost:9999/healthz || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 5
       start_period: 5s
+    restart: unless-stopped
 
   storage3:
     build:
@@ -53,11 +56,12 @@ services:
     networks:
       - internal_net
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/healthz"]
+      test: ["CMD-SHELL", "curl -f http://localhost:9999/healthz || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 5
       start_period: 5s
+    restart: unless-stopped
 
 networks:
   internal_net:

@@ -48,6 +48,7 @@ func (h *InternalHandlers) Heartbeat(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *InternalHandlers) Health(w http.ResponseWriter, r *http.Request) {
+	log.Println("Invoked healthcheck")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Healthy"))
 }
